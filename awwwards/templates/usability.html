@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+{{block.super}}
+<div class="container" style="margin-top:50px;margin-bottom:50px;">
+    <div class="row">
+        <div class="col-md-2 col-sm-1 "></div>
+        <div class="col-md-8 col-sm-10 col-xs-12">
+            <div class="card">
+                <img class="img-responsive" src="{{project.image.url}}" style="width:400px;height:400px;"><br>
+                <form style="border:white" action="/rateusability/{{project.id}}" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    {% bootstrap_form form%}
+                    <input type="submit" class="btn btn-primary btn-sm" value="Post">
+                </form>
+            </div>
+            <!-- Ratings section that displays the rates -->
+            <h2 class="text-center com">Ratings</h2><br>
+            {% for rate in rati %}
+            <img class="post2" src="{{rate.user.profile.profile_photo.url}}"><strong>{{rate.user.username}}</strong></p>
+            <br>
+            <p class="ment">{{rate.rating}}</p>
+            <hr>
+            {% endfor %}
+
+        </div>
+        {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {% bootstrap_javascript %} {% endblock %}
+        <div class="col-md-2 col-sm-1"></div>
+    </div>
+</div>
+<br><br><br>
+
+{%endblock%}
