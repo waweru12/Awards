@@ -37,19 +37,18 @@ def upload(request):
     return render(request, 'new-project.html', {"form": form, "user": current_user})
 
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url="/accounts/login/")
 def profile(request,id):
-    profile=User.objects.get(username=request.user)
+
+    current_user = request.user
+    user = User.objects.get(id=id)
+    profile = Profile.objects.all()
     try:
-        user = request.user
+      profile3 = Profile.objects.filter(name_id=id)
     except ObjectDoesNotExist:
-        return redirect(home)
- 
-    images = Project.objects.filter(user=user)
+      return redirect() 
+    return render(request, 'profile.html', { "user":user, "profile":profile3, "profile":profile})
 
-
-  
-    return render(request, 'profile.html', {"images":images, "user":user, "profile":profile})
 @login_required(login_url='/accounts/login')
 def add_usability(request, project_id):
     rati = UsabilityRating.objects.filter(project_id=project_id)
@@ -84,7 +83,7 @@ def add_design(request, project_id):
     else:
         form = DesignForm()
     return render(request, 'outline.html',locals())
-    
+
 @login_required(login_url='/accounts/login')
 def add_content(request,  project_id):
     rates = ContentRating.objects.filter(project_id=project_id)
