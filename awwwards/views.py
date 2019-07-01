@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Project,UsabilityRating,ContentRating,DesignRating,Profile
+from .models import Project, UsabilityRating, ContentRating, DesignRating, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewProjectForm,DesignForm,UsabilityForm,ContentForm
-
+from .forms import NewProjectForm, DesignForm, UsabilityForm, ContentForm
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer, ProjectSerializer
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -62,7 +66,7 @@ def add_usability(request, project_id):
     else:
         form = UsabilityForm()
 
-    return render(request, 'usability.html',locals())
+    return render(request, 'operable.html',locals())
 
 @login_required(login_url='/accounts/login')
 def add_design(request, project_id):
@@ -79,7 +83,8 @@ def add_design(request, project_id):
         return redirect('homePage')
     else:
         form = DesignForm()
-    return render(request, 'design.html',locals())
+    return render(request, 'outline.html',locals())
+    
 @login_required(login_url='/accounts/login')
 def add_content(request,  project_id):
     rates = ContentRating.objects.filter(project_id=project_id)
@@ -98,7 +103,7 @@ def add_content(request,  project_id):
     else:
         form = ContentForm()
 
-    return render(request, 'content.html',locals())
+    return render(request, 'text.html',locals())
 
 @login_required(login_url='/accounts/login')
 def search_results(request):
