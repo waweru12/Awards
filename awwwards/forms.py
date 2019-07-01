@@ -9,19 +9,19 @@ class NewProjectForm(forms.ModelForm):
         exclude = ['user']
 
 
-class ContentForm(forms.ModelForm):
+class OutlineForm(forms.ModelForm):
     class Meta:
         model = ContentRating
         fields = ['rating','user']
 
 
-class UsabilityForm(forms.ModelForm):
+class OperableForm(forms.ModelForm):
     class Meta:
         model = UsabilityRating
         fields = ['rating','user']
 
 
-class DesignForm(forms.ModelForm):
+class TextForm(forms.ModelForm):
     class Meta:
         model = DesignRating
         fields = ['rating','user']

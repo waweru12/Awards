@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Project, UsabilityRating, ContentRating, DesignRating, Profile
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewProjectForm, DesignForm, UsabilityForm, ContentForm
+from .forms import NewProjectForm, TextForm, OperableForm, OutlineForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectSerializer
@@ -37,17 +37,17 @@ def upload(request):
     return render(request, 'new-project.html', {"form": form, "user": current_user})
 
 
-@login_required(login_url='/accounts/login/')
-def profile(request, id):
-    profile = User.objects.get(username=request.user)
+@login_required(login_url="/accounts/login/")
+def profile(request,id):
+
+    current_user = request.user
+    user = User.objects.get(id=id)
+    profile = Profile.objects.all()
     try:
-        user = request.user
+      profile3 = Profile.objects.filter(name_id=id)
     except ObjectDoesNotExist:
-        return redirect(home)
-
-    images = Project.objects.filter(user=user)
-
-    return render(request, 'profile.html', {"images": images, "user": user, "profile": profile})
+      return redirect() 
+    return render(request, 'profile.html', {"user":user, "profile":profile3, "profile":profile})
 
 @login_required(login_url='/accounts/login')
 def add_usability(request, project_id):
@@ -63,7 +63,7 @@ def add_usability(request, project_id):
             rating.save()
         return redirect('homePage')
     else:
-        form = UsabilityForm()
+        form = OperableForm()
 
     return render(request, 'operable.html',locals())
 
@@ -81,7 +81,7 @@ def add_design(request, project_id):
             rating.save()
         return redirect('homePage')
     else:
-        form = DesignForm()
+        form = TextForm()
     return render(request, 'outline.html',locals())
 
 @login_required(login_url='/accounts/login')
@@ -100,7 +100,7 @@ def add_content(request,  project_id):
 
         return redirect('homePage')
     else:
-        form = ContentForm()
+        form = OutlineForm()
 
     return render(request, 'text.html',locals())
 
