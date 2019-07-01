@@ -11,6 +11,11 @@ urlpatterns=[
     url(r'^rateusability/(\d+)',views.add_usability, name='rateusability'),
     url(r'^profile/(\d+)',views.profile,name='profile'),
     url(r'^search/', views.search_results, name='search_results'),
+    url(r'^api/profile/$', views.ProfileList.as_view()),
+    url(r'^api/project/$', views.ProjectList.as_view()),
+    url(r'api/project/project-id/(?P<pk>[0-9]+)/$',views.ProjectDescription.as_view()),
+    url(r'api/profile/profile-id/(?P<pk>[0-9]+)/$',views.ProfileDescription.as_view()),
+
 
 
 
