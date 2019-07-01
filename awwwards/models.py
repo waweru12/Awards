@@ -23,6 +23,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to = 'images/')
     project_name = models.CharField(max_length =10)
     project_url = models.CharField(max_length =50)
+    description = models.CharField(max_length =50)
     user= models.ForeignKey(User,on_delete=models.CASCADE)
 
     def save_project(self):
