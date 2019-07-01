@@ -1,29 +1,32 @@
 {%extends 'base.html'%}
+{% load bootstrap4 %}
 {% block content %}
-<div class="container" id="search">
-
-  <div class="row">
-    {% if project%}
-    <h2>Found {{ projectlength }} of searched term {{message}}</h2>
+<br><br>
+<div class="container">
+    <!-- {% if profile %}
+    <h2>Found {{ profile|length }} of searched term {{ message }}.</h2>
     {% else %}
-    <h2> Found 0 project for the search term {{message}}</h2>
-    {% endif %}
-
-  </div>
-
+    <h2>Found 0 articles for the searched term {{ message }}.</h2>
+    {% endif %} -->
   <div class="row">
-
-    {% if project %}
-    {% for project in project %}
-
-    <div class="col-md-6">
-      <div class="card">
-        <h1>{{project.project_name}}</h1>
-        <img src="{{project.image.url}}" class="image-responsive" style="height:300px;width:600px" data-toggle="tooltip">
-      </div>
+    {% if profile %}
+    {% for pro in profile %}
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <img src="{{pro.profile_pic.url}}" class="img-circle" alt="image" style="height:200px; width:200px;">
     </div>
+    <div lass="col-md-6">
+      <h2 style="text-align: center;font-family: 'Righteous', cursive;font-size: 62px">{{pro.name}}</h2>
+      <br><br>
+      {% autoescape on %}
+      <p style="text-align: center; font-family: 'Iceland', cursive;font-size: 33px">{{pro.bio| safe}}</p>
+      {% endautoescape %}
+    </div>
+    <div class="col-md-2"></div>
+    <a class="btn btn-default"  href="{% url 'profile' user.id %}">Visit profile</a>
+    <hr>
+    {% endfor %}
+    {% endif %}
+  </div>
 </div>
-</div>
-{% endfor %}
-{% endif %}
 {% endblock %}

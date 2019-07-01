@@ -10,7 +10,7 @@ urlpatterns=[
     url(r'^ratedesign/(\d+)',views.add_design, name='ratedesign'),
     url(r'^rateusability/(\d+)',views.add_usability, name='rateusability'),
     url(r'^profile/(\d+)',views.profile,name='profile'),
-    url(r'^search/', views.search_results, name='search_results'),
+    url(r'^search/', views.search_results, name='search'),
     url(r'^api/profile/$', views.ProfileList.as_view()),
     url(r'^api/project/$', views.ProjectList.as_view()),
     url(r'api/project/project-id/(?P<pk>[0-9]+)/$',views.ProjectDescription.as_view()),
