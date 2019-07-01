@@ -10,13 +10,13 @@
                 <div class="col-md-3">
 
                 </div>
-                <div class="col-md-6" style="text-align: center; ">
+                <div class="col-md-8" style="text-align: center; ">
                         {%for project in projects%}
                         <br><br>
 
                         <div class="card img-fluid" style="margin-right: 40px">
                                 <img src="{{project.image.url}}" class="card img-fluid" alt="image"
-                                        style="width:500px;height:500px">
+                                        style="width:1500px;height:500px">
                                 <a href="{% url 'ratecontent' project.id %}" class="btn btn-outline-info btn-sm">Rate
                                         Content</a>
                                 <a href="{% url 'ratedesign' project.id %}" class="btn btn-outline-info btn-sm">Rate
