@@ -37,17 +37,17 @@ def upload(request):
     return render(request, 'new-project.html', {"form": form, "user": current_user})
 
 
-@login_required(login_url="/accounts/login/")
-def profile(request,id):
-
-    current_user = request.user
-    user = User.objects.get(id=id)
-    profile = Profile.objects.all()
+@login_required(login_url='/accounts/login/')
+def profile(request, id):
+    profile = User.objects.get(username=request.user)
     try:
-      profile3 = Profile.objects.filter(name_id=id)
+        user = request.user
     except ObjectDoesNotExist:
-      return redirect() 
-    return render(request, 'profile.html', { "user":user, "profile":profile3, "profile":profile})
+        return redirect(home)
+
+    images = Project.objects.filter(user=user)
+
+    return render(request, 'profile.html', {"images": images, "user": user, "profile": profile})
 
 @login_required(login_url='/accounts/login')
 def add_usability(request, project_id):

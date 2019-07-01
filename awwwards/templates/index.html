@@ -4,28 +4,42 @@
 {% block content %}
 {{block.super}}
 
-      
+
 <div class="container">
         <div class="row">
-                <div class="col-md-12">
- {%for project in projects%}
- <br><br>
- 
- <div class="card img-fluid" style="width:500px;">
- <img src="{{project.image.url}}" class="card img-fluid" alt="image" style="width:500px;height:500px">
- <a href="{% url 'ratecontent' project.id %}" class="btn btn-outline-info btn-sm">Rate Content</a>
- <a href="{% url 'ratedesign' project.id %}" class="btn btn-outline-info btn-sm">Rate Design </a>
- <a href="{% url 'rateusability' project.id %}" class="btn btn-outline-info btn-sm">Rate Usability</a>
- <a href="{% url 'profile' user.id %}" class="btn btn-outline-info btn-sm"> view profile</a>
-</div>
-<h5 style="color:black;">Project name:{{project.project_name}}</h5>
- <h5 style="color:black;">URL:{{project.project_url}}</h5>
-</div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-6" style="text-align: center; ">
+                        {%for project in projects%}
+                        <br><br>
+
+                        <div class="card img-fluid" style="margin-right: 40px">
+                                <img src="{{project.image.url}}" class="card img-fluid" alt="image"
+                                        style="width:500px;height:500px">
+                                <a href="{% url 'ratecontent' project.id %}" class="btn btn-outline-info btn-sm">Rate
+                                        Content</a>
+                                <a href="{% url 'ratedesign' project.id %}" class="btn btn-outline-info btn-sm">Rate
+                                        Design </a>
+                                <a href="{% url 'rateusability' project.id %}" class="btn btn-outline-info btn-sm">Rate
+                                        Usability</a>
+                                <a href="{% url 'profile' user.id %}" class="btn btn-outline-info btn-sm"> view
+                                        profile</a>
+                        </div>
+                        <h5 style="color:rgb(20, 95, 192);">Project:{{project.project_name}}</h5>
+                        <a href="{{project.project_url}}" class="btn btn-primary">link</a>
+                        {% endfor %}
+                </div>
+                <div class="col-md-3">
+
+                </div>
 
 
- {% endfor %}
- </div>
- </div>
+
+
+
+        </div>
+</div>
 
 </div>
 {% endblock %}

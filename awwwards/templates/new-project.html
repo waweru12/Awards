@@ -11,7 +11,7 @@
          <div class="card-body">
              <div>
                  <form class="form-group" action="{%url 'upload'%}" method="post" enctype="multipart/form-data">
-                   <h3>Upload a new photo</h3>
+                   <h3>Upload a new project</h3>
                    {%csrf_token%}
                    {%bootstrap_form form%}
                    <button id="makeUpload" class="btn btn-outline-info" type="submit" name="button">Upload</button>
