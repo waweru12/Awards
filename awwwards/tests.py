@@ -36,4 +36,4 @@ class RatingtTest(TestCase):
         self.new_rating = Comment(project=self.newproject,user=self.user,design='2',usability='5',content='9',comment='You are awesome',)
    
     def test_instance(self):
-self.assertTrue(isinstance(self.new_rating,Comment))
+        self.assertTrue(isinstance(self.new_rating,Comment))
