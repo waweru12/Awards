@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Project, Profile, Rating
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import  ProfileForm, ProjectForm, RatingForm
+from .forms import  ProfileForm, NewProjectForm, RatingForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectSerializer
