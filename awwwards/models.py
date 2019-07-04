@@ -44,8 +44,8 @@ class Project(models.Model):
         return project_result
 # START OF THE CLASSES FOR RATING 
 
-class DesignRating(models.Model):
-    RATING_CHOICES = (
+class Rating(models.Model):
+    RATING = (
         (1, '1'),
         (2, '2'),
         (3, '3'),
@@ -59,41 +59,10 @@ class DesignRating(models.Model):
     )
     project = models.ForeignKey('Project')
     user = models.ForeignKey(User)
-    rating = models.IntegerField(choices=RATING_CHOICES, null=True)
+    design = models.IntegerField(choices=RATING)
+    usability = models.IntegerField(choices=RATING)
+    content = models.IntegerField(choices=RATING)
+    comment = models.CharField(max_length=500)
     
-class UsabilityRating(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6,'6'),
-        (7,'7'),
-        (8,'8'),
-        (9,'9'),
-        (10,'10')
-    )
-    project = models.ForeignKey('Project')
-    user = models.ForeignKey(User)
-    rating = models.IntegerField(choices=RATING_CHOICES, null=True)
-    
-
-class ContentRating(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6,'6'),
-        (7,'7'),
-        (8,'8'),
-        (9,'9'),
-        (10,'10')
-    )
-    project = models.ForeignKey('Project')
-    user = models.ForeignKey(User)
-    rating = models.IntegerField(choices=RATING_CHOICES, null=True)
-    
-
+    def save_profile(self):
+        self.save()

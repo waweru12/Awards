@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Project, UsabilityRating, ContentRating, DesignRating, Profile
+from .models import Project, Profile, Rating
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewProjectForm, TextForm, OperableForm, OutlineForm
+from .forms import  ProfileForm, ProjectForm, RatingForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectSerializer
@@ -48,61 +48,6 @@ def profile(request,id):
     except ObjectDoesNotExist:
       return redirect() 
     return render(request, 'profile.html', {"user":user, "profile":profile3, "profile":profile})
-
-@login_required(login_url='/accounts/login')
-def add_usability(request, project_id):
-    rati = UsabilityRating.objects.filter(project_id=project_id)
-    project = Project.objects.get(pk=project_id)
-    profile = User.objects.get(username=request.user)
-    if request.method == 'POST':
-        form = UsabilityForm(request.POST)
-        if form.is_valid():
-            rating = form.save(commit=False)
-            rating.project = project
-            rating.user = request.user
-            rating.save()
-        return redirect('homePage')
-    else:
-        form = OperableForm()
-
-    return render(request, 'operable.html',locals())
-
-@login_required(login_url='/accounts/login')
-def add_design(request, project_id):
-    rato = DesignRating.objects.filter(project_id=project_id)
-    project = Project.objects.get(pk=project_id)
-    profile = User.objects.get(username=request.user)
-    if request.method == 'POST':
-        form = DesignForm(request.POST)
-        if form.is_valid():
-            rating = form.save(commit=False)
-            rating.project = project
-            rating.user_name = request.user
-            rating.save()
-        return redirect('homePage')
-    else:
-        form = TextForm()
-    return render(request, 'outline.html',locals())
-
-@login_required(login_url='/accounts/login')
-def add_content(request,  project_id):
-    rates = ContentRating.objects.filter(project_id=project_id)
-    project = Project.objects.get(pk=project_id)
-    profile = User.objects.get(username=request.user)
-    if request.method == 'POST':
-        form = ContentForm(request.POST)
-        if form.is_valid():
-            rating = form.save(commit=False)
-            rating.project = project
-
-            rating.user_name = request.user
-            rating.save()
-
-        return redirect('homePage')
-    else:
-        form = OutlineForm()
-
-    return render(request, 'text.html',locals())
 
 @login_required(login_url='/accounts/login')
 def search_results(request):
