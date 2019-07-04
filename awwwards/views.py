@@ -61,6 +61,27 @@ def search_results(request):
         message = "You haven't searched for any term."
         return render(request, 'search.html', {"message":message})
 
+@login_required(login_url='/accounts/login/')
+def rating(request, id):
+    current_user = request.user
+    rating = Rating.objects.filter(project_id=id)
+    profile = Profile.objects.all()
+    project = Project.objects.get(id=id)
+    if request.method == 'POST':
+        print('noo')
+        form = RatingForm(request.POST, request.FILES)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.project = project
+            rating.user = current_user
+            rating.name_id = current_user.id
+            rating.save()
+        return redirect(home)
+
+    else:
+        form = RatingForm()
+        print('xyz')
+    return render(request, 'review.html', {"form": form, 'user': current_user, 'profile':profile, 'project':project, 'rating':rating})
 
 class ProjectList(APIView):
    def get(self, request, format=None):

@@ -17,12 +17,9 @@
                         <div class="card img-fluid" style="margin-right: 40px">
                                 <img src="{{project.image.url}}" class="card img-fluid" alt="image"
                                         style="width:1500px;height:500px">
-                                <a href="{% url 'ratecontent' project.id %}" class="btn btn-outline-info btn-sm">Rate
-                                        Content</a>
-                                <a href="{% url 'ratedesign' project.id %}" class="btn btn-outline-info btn-sm">Rate
-                                        Design </a>
-                                <a href="{% url 'rateusability' project.id %}" class="btn btn-outline-info btn-sm">Rate
-                                        Usability</a>
+                                <a href="{% url 'rating' project.id %}" class="btn btn-outline-info btn-sm">Ratings
+                                        </a>
+                              
                                 <a href="{% url 'profile' user.id %}" class="btn btn-outline-info btn-sm"> view
                                         profile</a>
                         </div>

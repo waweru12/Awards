@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  <img class="img-respronsive" src="{{project.image.url}}" alt="image"
+    style="height: 450px; width:550px; margin-left: 25%">
+  <br><br>
+  <h3 style="text-align: center; color:white;"><u>REVIEWS</u></h3>
+  <div class="row">
+    {% for rating in rating %}
+    <div class="col-md-6">
+      <div class="card-body">
+        <h3 style="color:black; font-family: 'Righteous', cursive">{{rating.user}}</h3>
+        <h4 style="color:black;">Design: <strong>{{rating.design}}</strong> Usability:
+          <strong>{{rating.usability}}</strong>
+          Content:<strong>{{rating.content}}</strong></h4>
+       
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class=" card mt-5" style="background-color:whitesmoke">
+    <div class="card-body" style="color:black">
+      <form action="/rating/{{user.id}}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-primary btn-sm" value="Post">
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -62,7 +62,6 @@ class Rating(models.Model):
     design = models.IntegerField(choices=RATING)
     usability = models.IntegerField(choices=RATING)
     content = models.IntegerField(choices=RATING)
-    comment = models.CharField(max_length=500)
-    
+   
     def save_profile(self):
         self.save()
