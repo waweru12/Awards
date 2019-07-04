@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import ContentRating,Project,Profile
+from .models import Project,Profile
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
@@ -8,7 +8,7 @@ class ProjectTestCLass(TestCase):
     setup self instance of project
     '''
     def setUp(self):
-        self.post = Project(project_name='awward',project_url='www.awards.com')
+        self.post = Project(project_name='Awwards',project_url='www.awards.com')
     
     ''' 
     test instance of project
@@ -31,7 +31,7 @@ class profileTestCLass(TestCase):
     setup self instance of profile
     '''
     def setUp(self):
-        self.prof = Profile(Bio='Live the moment')
+        self.prof = Profile(Bio='Let it be')
     
     ''' 
     test instance of profile
